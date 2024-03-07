@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .a{
+            background-image: url(./wet12.webp);
+            background-position: center;
+            background-size:contain;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        .a1{
+            
+            height: 360px;
+            width: 400px;
+            border: 3px solid rgba(12, 2, 72, 0.945);
+            font-size: 35px;
+            position: relative;
+            left: 520px;
+            top: 180px;
+            background-image: url(./wet9.jpg);
+            background-position: center;
+            background-size: cover;
+            border-radius: 10px;
+            color:red;
+            text-align: center;
+
+        }
+        #b1{
+
+            height: 40px;
+            width:300px;
+            border: 3px solid black;
+            margin-left: 560px;
+            position: relative;
+            top: 60px;
+            box-shadow: 5px 5px;
+        }
+
+        #b2{
+
+            height: 30px;
+            width:100px;
+            border: 3px solid black;
+            margin-left: 620px;
+            position: relative;
+            top: 80px;
+            box-shadow: 3px 3px;
+            background-color: rgba(0, 0, 0, 0.18);
+}
+
+
+        
+
+    </style>
+</head>
+<body class="a">
+
+   <form>
+
+    <input type="search" id="b1">
+    <br>
+    <input type="submit" id="b2">
+
+
+
+   </form>
+
+   <div class="a1">
+    <p>Temperature: <span> </span></p>
+    <p> Wind : <span></span></p>
+    <p>Pressure : <span></span></p>
+    <p>Humidity : <span></span></p>
+   </div>
+
+
+
+
+
+   
+
+
+<script>
+
+    document.forms[0].addEventListener("submit",(e)=>{
+
+        e.preventDefault();
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${e.target[0].value}&appid=bf89bc2cde67abeceea98d4c23a10716`)
+
+        .then((value)=>{
+            return value.json()
+        }).then((value)=>{
+            console.log(value);
+
+            var a=document.getElementsByTagName("span")
+            a[0].innerText=Math.floor(value.main.temp-273)+"c"
+            a[1].innerText=value.wind.speed
+            a[2].innerText=value.main.pressure
+            a[3].innerText=value.main.humidity
+
+        })
+
+
+
+        
+
+
+    })
+
+
+
+   
+
+
+
+
+</script>
+</body>
+</html>
